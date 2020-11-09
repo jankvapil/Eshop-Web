@@ -2,12 +2,12 @@ import React, { useState } from 'react'
 
 interface ProductsListItemsProps {
   product: {
-    id: number;
-    name: string;
-    price: number;
-    type: string;
-    description: string;
-    imgUrl: string;
+    id: number
+    name: string
+    price: number
+    type: string
+    description: string
+    imgUrl: string
   }
 }
 
@@ -23,7 +23,7 @@ React.FC<ProductsListItemsProps> = ({ product }) => {
     <li key={ product.id }>
       <div className="card text-black bg-white mb-3">
         <div className="card-header">
-          <strong>
+          <strong style={{fontSize: 20, float: 'left', width: 500}}>
             { product.name }
           </strong>
           <div style={{float: 'right'}}>
@@ -42,7 +42,8 @@ React.FC<ProductsListItemsProps> = ({ product }) => {
             width={350}
           />
           <div style={{float: 'left', width: 500, marginLeft: 20}}>
-            <h3>  { product.name } </h3>
+            <h3>{ product.name }</h3>
+            <h4>${ product.price }</h4>
             <p className="card-text">
               { product.description }
             </p>

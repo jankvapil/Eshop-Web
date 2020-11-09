@@ -2,12 +2,12 @@ import React, { useState } from 'react'
 
 interface ProductsListItemsProps {
   product: {
-    id: number;
-    name: string;
-    price: number;
-    type: string;
-    description: string;
-    imgUrl: string;
+    id: number
+    name: string
+    price: number
+    type: string
+    description: string
+    imgUrl: string
   }
 }
 

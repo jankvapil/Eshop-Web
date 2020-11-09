@@ -37,18 +37,14 @@ const ProductSection = () => {
     })
   }
 
-  //////////////////////////////
-
-  const styles = {
-    container: {
-      width: '100%',
-    }
-  }
+  /////////////////////////////
 
   return (
-    <section style={styles.container}>
+    <section style={{
+      width: '100%',
+    }}>
       <header>
-        <h2>Select Products</h2>
+        <h2 style={{margin: '0 0 20px 10px'}}>Select Products</h2>
       </header>
       <ul>
         { 

@@ -9,8 +9,13 @@ import './bootstrap.css';
 
 import ProductSection from './components/products/ProductSection'
 import UserFormSection from './components/userForm/UserFormSection'
+import OrderSection from './components/orders/OrderSection'
+import Footer from './components/Footer'
 
-function App() {
+///
+/// Main Page
+///
+const App = () => {
 
   const [height, setHeight] = useState(window.innerHeight)
   useEffect(() => {
@@ -55,8 +60,10 @@ function App() {
         <ProductSection />
         <hr className="my-4" />
         <UserFormSection />
+        
+        <OrderSection />
         <hr className="my-4" />
-
+        <Footer />
     </div>
   );
 }
