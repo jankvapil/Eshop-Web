@@ -1,41 +1,17 @@
-import React, { useState, useEffect } from 'react'
+import React from 'react'
 
-import { sendRequest } from '../../api/sendRequest'
-import * as requests from '../../api/requests'
+import { OrderListItem } from './OrderListItem'
+import { UserOrders } from '../../types'
 
-import { ProductListItem } from './ProductListItem'
-
-type Product = {
-  id: number
-  name: string
-  price: number
-  type: string
-  description: string
-  imgUrl: string
+interface OrderSectionProps {
+  orders: Array<UserOrders>
 }
 
 ///
 /// Products Section component
 ///
-const OrderSection = () => {
-
-  // const [products, setProducts] = useState<Product[]>([])
-  // useEffect(() => {
-  //   getProducts()
-  //   console.log("loaded")
-  // }, [])
-
-  // ///
-  // /// fetch products from db
-  // ///
-  // const getProducts = async () => {
-  //   const result = sendRequest(requests.GET_ALL_PRODUCTS)
-  //   result.then((res) => {
-  //     if (res) {
-  //       setProducts(res.products)
-  //     }
-  //   })
-  // }
+const OrderSection: 
+React.FC<OrderSectionProps> = ({ orders }) => {
 
   //////////////////////////////
 
@@ -45,12 +21,30 @@ const OrderSection = () => {
     }
   }
 
+  //////////////////////////////
+
   return (
     <section style={styles.container}>
       <header>
         <h2 style={{margin: '0 0 20px 10px'}}>Orders</h2>
       </header>
-      
+
+      <table className="table table-hover">
+        <thead>
+          <tr>
+            <th scope="col"><strong>User</strong></th>
+            <th scope="col"><strong>Order Date</strong></th>
+            <th scope="col"><strong>Total Price</strong></th>
+          </tr>
+        </thead>
+        <tbody>
+          { 
+            orders.map(o => (
+              <OrderListItem key={o.name} order={o} />
+            ))
+          }
+        </tbody>
+      </table>
     </section>
   );
 }

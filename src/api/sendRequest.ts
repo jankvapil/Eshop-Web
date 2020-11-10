@@ -3,7 +3,7 @@ import axios from 'axios'
 const GRAPHQL_API = "http://localhost:5000/graphql"
 
 export const sendRequest = async (query: string) => {
-  console.log(`Sending query: `)
+  console.log(`Sending request: `)
   console.log(query)
 
   try {

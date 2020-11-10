@@ -11,12 +11,16 @@ import ProductSection from './components/products/ProductSection'
 import UserFormSection from './components/userForm/UserFormSection'
 import OrderSection from './components/orders/OrderSection'
 import Footer from './components/Footer'
+import { Product, UserOrders } from './types'
 
 ///
 /// Main Page
 ///
 const App = () => {
-
+  
+  ///
+  /// set responsible height every time window resizes
+  ///
   const [height, setHeight] = useState(window.innerHeight)
   useEffect(() => {
     const handleResize = () => {
@@ -27,6 +31,64 @@ const App = () => {
       window.removeEventListener('resize', handleResize)
     }
   })
+
+  ///
+  /// fetch orders from db when page is loaded
+  ///
+  const [orders, setOrders] = useState<Array<UserOrders>>([])
+  useEffect(() => {
+    getOrders()
+    console.log("loaded")
+  }, [])
+
+  ///
+  /// fetch orders from db
+  ///
+  const getOrders = async () => {
+    const result = sendRequest(requests.GET_ALL_ORDERS)
+    result.then((res) => {
+      if (res) {
+        console.log(res)
+        setOrders(res.users)
+      }
+    })
+  }
+
+  ///
+  /// fetch products from db when page is loaded
+  ///
+  const [productMap, setProductMap] = useState(new Map())
+  const [products, setProducts] = useState<Product[]>([])
+  useEffect(() => {
+    getProducts()
+    console.log("loaded")
+  }, [])
+
+  ///
+  /// fetch products from db
+  ///
+  const getProducts = async () => {
+    const result = sendRequest(requests.GET_ALL_PRODUCTS)
+    result.then((res) => {
+      if (res) {
+        setProducts(res.products)
+        initMapOfProducts(res.products)
+      }
+    })
+  }
+
+  ///
+  /// creates map with productId and count
+  ///
+  const initMapOfProducts = (products: Product[]) => {
+    const map = new Map()
+    products.forEach(p => {
+      map.set(p.id, 0)   
+    })
+    setProductMap(map)
+  }
+
+  /////////////////////////////
 
   const styles = {
     page: {
@@ -49,6 +111,8 @@ const App = () => {
     }
   }
 
+  /////////////////////////////
+
   return (
     <div className="App" style={ styles.page }>
      
@@ -57,11 +121,14 @@ const App = () => {
         </div>
         
         <hr className="my-4" />
-        <ProductSection />
+        <ProductSection products={products} productMap={productMap} />
         <hr className="my-4" />
-        <UserFormSection />
+        <UserFormSection 
+          productMap={productMap} 
+          getOrders={getOrders}
+        />
         
-        <OrderSection />
+        <OrderSection orders={orders} />
         <hr className="my-4" />
         <Footer />
     </div>

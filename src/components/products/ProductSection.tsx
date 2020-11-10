@@ -1,43 +1,18 @@
-import React, { useState, useEffect } from 'react'
-
-import { sendRequest } from '../../api/sendRequest'
-import * as requests from '../../api/requests'
+import React from 'react'
 
 import { ProductListItem } from './ProductListItem'
+import { Product } from '../../types'
 
-type Product = {
-  id: number;
-  name: string;
-  price: number;
-  type: string;
-  description: string;
-  imgUrl: string;
+interface ProductSectionProps {
+  products: Array<Product>
+  productMap: Map<number, number>
 }
 
 ///
 /// Products Section component
 ///
-const ProductSection = () => {
-
-  const [products, setProducts] = useState<Product[]>([])
-  useEffect(() => {
-    getProducts()
-    console.log("loaded")
-  }, [])
-
-  ///
-  /// fetch products from db
-  ///
-  const getProducts = async () => {
-    const result = sendRequest(requests.GET_ALL_PRODUCTS)
-    result.then((res) => {
-      if (res) {
-        setProducts(res.products)
-      }
-    })
-  }
-
-  /////////////////////////////
+const ProductSection: 
+React.FC<ProductSectionProps> = ({ products, productMap }) => {
 
   return (
     <section style={{
@@ -48,11 +23,11 @@ const ProductSection = () => {
       </header>
       <ul>
         { 
-          products.map(p => (<ProductListItem key={p.id} product={p}/>))
+          products.map(p => (<ProductListItem productMap={productMap} key={p.id} product={p}/>))
         }
       </ul>
     </section>
-  );
+  )
 }
 
-export default ProductSection;
+export default ProductSection
