@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react'
-import { OrderItem, User, UserEmails } from '../../types'
+import { OrderItem, User, UserEmails } from '../../core/types'
 
-import { sendRequest } from '../../api/sendRequest'
-import * as requests from '../../api/requests'
+import { sendRequest } from 'core/sendRequest'
+import * as requests from 'core/requests'
 
 interface  UserFormSectionProps {
   getOrders: Function

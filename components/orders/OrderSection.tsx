@@ -1,7 +1,7 @@
 import React from 'react'
 
 import { OrderListItem } from './OrderListItem'
-import { UserOrders } from '../../types'
+import { UserOrders } from '../../core/types'
 
 interface OrderSectionProps {
   orders: Array<UserOrders>

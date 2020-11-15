@@ -1,4 +1,4 @@
-import { OrderItem, User } from "../types"
+import { OrderItem, User } from "./types"
 
 
 const getNowDate = () => {

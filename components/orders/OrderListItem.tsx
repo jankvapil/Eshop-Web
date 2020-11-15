@@ -1,5 +1,5 @@
 import React from 'react'
-import { UserOrders } from '../../types'
+import { UserOrders } from '../../core/types'
 
 export interface OrderListItemProps {
   order: UserOrders

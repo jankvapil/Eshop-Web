@@ -1,17 +1,19 @@
-import React, { useState, useEffect } from 'react'
-import { sendRequest } from './api/sendRequest'
-import * as requests from './api/requests'
+import { useState, useEffect } from 'react'
+import { sendRequest } from 'core/sendRequest'
+import * as requests from 'core/requests'
 
-import bgimg from './bgimg.jpeg'
+// import bgimg from 'static/images/bgimg'
 
-import './reset.css'
-import './bootstrap.css';
 
-import ProductSection from './components/products/ProductSection'
-import UserFormSection from './components/userForm/UserFormSection'
-import OrderSection from './components/orders/OrderSection'
-import Footer from './components/Footer'
-import { Product, UserOrders } from './types'
+// import Link from 'next/link'
+// import Layout from '../components/Layout'
+
+import ProductSection from 'components/products/ProductSection'
+import UserFormSection from 'components/userForm/UserFormSection'
+import OrderSection from 'components/orders/OrderSection'
+import Footer from 'components/Footer'
+import { Product, UserOrders } from 'core/types'
+
 
 ///
 /// Main Page
@@ -21,16 +23,16 @@ const App = () => {
   ///
   /// set responsible height every time window resizes
   ///
-  const [height, setHeight] = useState(window.innerHeight)
-  useEffect(() => {
-    const handleResize = () => {
-      setHeight(window.innerHeight)
-    }
-    window.addEventListener('resize', handleResize)
-    return () => {
-      window.removeEventListener('resize', handleResize)
-    }
-  })
+  // const [height, setHeight] = useState(window.innerHeight)
+  // useEffect(() => {
+  //   const handleResize = () => {
+  //     setHeight(window.innerHeight)
+  //   }
+  //   window.addEventListener('resize', handleResize)
+  //   return () => {
+  //     window.removeEventListener('resize', handleResize)
+  //   }
+  // })
 
   ///
   /// fetch orders from db when page is loaded
@@ -94,7 +96,7 @@ const App = () => {
     page: {
       margin: 'auto',
       width: 1000,
-      minHeight: height + 200, 
+      // minHeight: height + 200, 
       // outline: 'red solid 1px',
     },
 
@@ -102,7 +104,7 @@ const App = () => {
       display: 'block',
       width: '100%',
       height: 100,
-      backgroundImage: `url(${ bgimg })`,
+      backgroundImage: `url('./bgimg.jpeg')`,
     },
 
     title: {
@@ -135,4 +137,4 @@ const App = () => {
   );
 }
 
-export default App;
+export default App

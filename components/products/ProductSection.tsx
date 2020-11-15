@@ -1,7 +1,7 @@
 import React from 'react'
 
 import { ProductListItem } from './ProductListItem'
-import { Product } from '../../types'
+import { Product } from '../../core/types'
 
 interface ProductSectionProps {
   products: Array<Product>
