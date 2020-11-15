@@ -6,7 +6,6 @@ import Layout from 'components/common/Layout'
 
 import ProductSection from 'components/products/ProductSection'
 import UserFormSection from 'components/userForm/UserFormSection'
-import OrderSection from 'components/orders/OrderSection'
 
 import { Product, UserOrders } from 'core/types'
 
@@ -33,7 +32,7 @@ const App = () => {
   ///
   /// fetch orders from db when page is loaded
   ///
-  const [orders, setOrders] = useState<Array<UserOrders>>([])
+  const [, setOrders] = useState<Array<UserOrders>>([])
   useEffect(() => {
     getOrders()
     console.log("loaded")
