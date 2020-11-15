@@ -1,7 +1,7 @@
 import axios from 'axios'
 
 // const GRAPHQL_API = "http://localhost:5000/graphql"
-const GRAPHQL_API = "http://pne-eshop-api-v2.azurewebsites.net/graphql"
+const GRAPHQL_API = "https://pne-eshop-api-v2.azurewebsites.net/graphql"
 
 export const sendRequest = async (query: string) => {
   console.log(`Sending request: `)
