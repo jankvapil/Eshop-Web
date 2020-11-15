@@ -2,16 +2,12 @@ import { useState, useEffect } from 'react'
 import { sendRequest } from 'core/sendRequest'
 import * as requests from 'core/requests'
 
-// import bgimg from 'static/images/bgimg'
-
-
-// import Link from 'next/link'
-// import Layout from '../components/Layout'
+import Layout from 'components/common/Layout'
 
 import ProductSection from 'components/products/ProductSection'
 import UserFormSection from 'components/userForm/UserFormSection'
 import OrderSection from 'components/orders/OrderSection'
-import Footer from 'components/Footer'
+
 import { Product, UserOrders } from 'core/types'
 
 
@@ -92,35 +88,8 @@ const App = () => {
 
   /////////////////////////////
 
-  const styles = {
-    page: {
-      margin: 'auto',
-      width: 1000,
-      // minHeight: height + 200, 
-      // outline: 'red solid 1px',
-    },
-
-    header: {
-      display: 'block',
-      width: '100%',
-      height: 100,
-      backgroundImage: `url('./bgimg.jpeg')`,
-    },
-
-    title: {
-      color: '#fff',
-      padding: '20px 0 0 10px',
-    }
-  }
-
-  /////////////////////////////
-
   return (
-    <div className="App" style={ styles.page }>
-     
-        <div style={ styles.header }>
-          <h1 style={ styles.title }>GPU Store</h1>
-        </div>
+      <Layout>
         
         <hr className="my-4" />
         <ProductSection products={products} productMap={productMap} />
@@ -130,11 +99,11 @@ const App = () => {
           getOrders={getOrders}
         />
         
-        <OrderSection orders={orders} />
-        <hr className="my-4" />
-        <Footer />
-    </div>
-  );
+        {/* <OrderSection orders={orders} /> */}
+        {/* <hr className="my-4" /> */}
+        
+    </Layout>
+  )
 }
 
 export default App
