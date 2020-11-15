@@ -161,7 +161,7 @@ React.FC<UserFormSectionProps> = ({ productMap, getOrders }) => {
     
     let flag = 0
     
-    productMap.forEach((value, key) => {  
+    productMap.forEach((value, ) => {  
       if (value > 0) {
         flag += 1
       }
