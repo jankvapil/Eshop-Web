@@ -10,21 +10,21 @@ import Layout from 'components/common/Layout'
 
 // import { Product, UserOrders } from 'core/types'
 
-import LoginForm from '@/components/auth/LoginForm'
+import RegisterForm from '@/components/auth/RegisterForm'
 
 ///
 /// Main Page
 ///
-const Login = () => {
+const Register = () => {
   
   /////////////////////////////
 
   return (
     <Layout>
         <hr className="my-4" />
-        <LoginForm />
+        <RegisterForm />
     </Layout>
   )
 }
 
-export default Login
+export default Register

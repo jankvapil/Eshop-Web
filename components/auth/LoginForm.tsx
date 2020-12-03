@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import Link from 'next/link'
 
 // interface  UserFormSectionProps {
 //   getOrders: Function
@@ -77,6 +78,10 @@ const UserFormSection = () => {
             type="submit" 
             className="btn btn-secondary"
           > Log In </button>
+
+          <Link href="/register">
+            <a className="navbar-brand">Do not have an account?</a>
+          </Link>
         </div>
       </section>
     </div>

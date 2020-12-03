@@ -7,6 +7,7 @@ const Footer = () => {
 
   const styles = {
     container: {
+      padding: '500px 0 50px 0',
       margin: 'auto',
       width: 1000,
       minHeight: 200,
