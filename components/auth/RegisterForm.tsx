@@ -1,6 +1,8 @@
 import { createUser, fetchUserEmails } from '@/core/authRequests'
 import { useState, useEffect } from 'react'
 
+import { useRouter } from 'next/router'
+
 // interface  UserFormSectionProps {
 //   getOrders: Function
 //   productMap: Map<number, number>
@@ -13,6 +15,8 @@ import { useState, useEffect } from 'react'
 /// UserForm Section component
 ///
 const RegisterForm = () => {
+
+  const router = useRouter()
 
   const [ name, setName ] = useState("")
   const [ email, setEmail ] = useState("")
@@ -80,14 +84,20 @@ const RegisterForm = () => {
     if (validateForm()) {
       alert("User already exists!")
     } else {
+      // const salt = bcrypt.genSaltSync(10)
+      // const hashedPass = bcrypt.hashSync(password, salt)
       const res = await createUser({
         name: name,
         password: password,
         email: email,
         address: address
       })
-      console.log(res)
-      alert("Registered!")
+
+      if (res) {
+        router.push('/')
+      } else {
+        alert("Something wrong has happend!")
+      }
     }
   }
  

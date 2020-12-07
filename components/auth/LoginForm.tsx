@@ -1,27 +1,28 @@
 import { useState } from 'react'
 import Link from 'next/link'
+import { useRouter } from 'next/router'
 
-// interface  UserFormSectionProps {
-//   getOrders: Function
-//   productMap: Map<number, number>
-// }
+var jwt = require('jsonwebtoken')
 
-// : 
-// React.FC<UserFormSectionProps> 
+import { login } from '@/core/authRequests'
+
+
 
 ///
 /// UserForm Section component
 ///
 const UserFormSection = () => {
+  
+  const router = useRouter()
 
-  const [ name, setname ] = useState("")
+  const [ email, setEmail ] = useState("")
   const [ password, setpassword ] = useState("")
  
   //////////////////////////////
 
-  const handleNameChange = (e: React.FormEvent<HTMLInputElement>) => {
+  const handleEmailChange = (e: React.FormEvent<HTMLInputElement>) => {
     const value = e.currentTarget.value
-    setname(value)
+    setEmail(value)
   }
 
   const handlePasswordChange = (e: React.FormEvent<HTMLInputElement>) => {
@@ -29,6 +30,35 @@ const UserFormSection = () => {
     setpassword(value)
   }
 
+  const handleOnClick = async () => {
+
+    if (email.length < 3) {
+      alert("Set valid email!")
+    } else {
+      
+      const res = await login({
+        email: email,
+        password: password
+      })
+      
+      // successfully logged in
+      if (res) {
+        
+        const decoded = jwt.verify(res.token, "secretsecretsecret");
+        const email = decoded['http://schemas.xmlsoap.org/ws/2005/05/identity/claims/name']
+        const id = decoded['http://schemas.xmlsoap.org/ws/2005/05/identity/claims/nameidentifier']
+
+        console.log(`logged as ${id}:${email}`)
+
+        localStorage.setItem('token', res.token)
+        localStorage.setItem('user_email', email)
+        localStorage.setItem('user_id', id)
+        router.push('/')
+      } else {
+        alert("Wrong email or password")
+      }
+    }
+  }
  
   //////////////////////////////
 
@@ -51,14 +81,14 @@ const UserFormSection = () => {
           style={{ width: 500, margin: 'auto' }} 
           className="form-group"
         >
-          <label htmlFor="nameInput">Username</label>
+          <label htmlFor="EmailInput">Email</label>
           <input 
-            id="nameInput" 
+            id="EmailInput" 
             type="text" 
             className="form-control" 
-            placeholder="Enter your username"
+            placeholder="Enter your email"
             style={styles.textField} 
-            onChange={handleNameChange}
+            onChange={handleEmailChange}
           />
           
           <label htmlFor="passwordInput">Password</label>
@@ -73,7 +103,7 @@ const UserFormSection = () => {
           />
           
           <button
-            onClick={() => console.log(`Login: ${name}:${password}`)}
+            onClick={handleOnClick}
             style={{width: 150, fontSize: 14, float: 'right'}} 
             type="submit" 
             className="btn btn-secondary"

@@ -93,10 +93,10 @@ const App = () => {
         <hr className="my-4" />
         <ProductSection products={products} productMap={productMap} />
         <hr className="my-4" />
-        <UserFormSection 
+        {/* <UserFormSection 
           productMap={productMap} 
           getOrders={getOrders}
-        />
+        /> */}
         
         {/* <OrderSection orders={orders} /> */}
         {/* <hr className="my-4" /> */}

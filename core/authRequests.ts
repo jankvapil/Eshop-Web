@@ -4,9 +4,28 @@ import { User } from "./types"
 ///
 /// Insert user into DB
 ///
+export const login = async ({ email, password}) => {
+  const query = _login({email: email, password: password})
+  const res = await sendRequest(query)
+  return res
+}
+
+const _login = ({ email, password}) => {
+  return `
+    mutation {
+      token(
+        email: "${email}"
+        password: "${password}" 
+      )
+    }
+  `
+} 
+
+///
+/// Insert user into DB
+///
 export const createUser = async (user: User) => {
   const query = _createUser(user)
-  console.log(query)
   const res = await sendRequest(query)
   return res
 }
@@ -34,7 +53,6 @@ const _createUser = (user: User) => {
 ///
 export const fetchUserEmails = async () => {
   const query = _fetchUserEmails()
-  console.log(query)
   const res = await sendRequest(query)
   return res
 }
