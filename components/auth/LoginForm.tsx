@@ -119,7 +119,7 @@ const UserFormSection = () => {
           > Log In </button>
 
           <Link href="/register">
-            <a className="navbar-brand">Do not have an account?</a>
+            <a style={{color: '#666'}} className="navbar-brand">Do not have an account?</a>
           </Link>
         </div>
       </section>

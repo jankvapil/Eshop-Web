@@ -1,17 +1,32 @@
-import React from 'react'
+
+import DataGrid, { 
+  Column, 
+  Pager, 
+  Paging }
+from 'devextreme-react/data-grid'
 
 ///
-/// Footer component
+/// Component displays all brands
 ///
-const OrdersGrid = ({
-  orders
-}) => {
-
+export default function OrdersGrid({orders}) { 
   return (
-    <div>
-      <button onClick={() => console.log(orders)}> orders </button>
-    </div>
+    <DataGrid
+      dataSource={orders}
+      showBorders={true}
+      style={{
+        float: "left",
+        width: "100%",
+      }}
+    >
+      <Paging defaultPageSize={20} />
+      <Pager
+        showPageSizeSelector={true}
+        allowedPageSizes={[10, 20, 50]}
+        showInfo={true} />
+
+      <Column dataField="id" caption="ID" />
+      <Column dataField="orderDate" caption="Order Date" />
+      <Column dataField="totalPrice" caption="Total Price" />
+    </DataGrid>
   )
 }
-
-export default OrdersGrid

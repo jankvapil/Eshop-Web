@@ -14,10 +14,23 @@ const getNowDate = () => {
   return now
 }
 
+///
+/// Get all user orders
+///
 export const getOrdersByUserId = async (id) => {
   const query = _getOrdersByUserId(id)
-  console.log(query)
   const res = await sendRequest(query)
+
+  if (res.user) {
+    for (let o of res.user.orders) {
+      let totalPrice = 0
+      for (let oi of o.orderItems) {
+        totalPrice += oi.count * oi.product[0].price
+       }
+      o.totalPrice = totalPrice
+    }
+  }
+
   return res
 }
 
@@ -42,6 +55,7 @@ export const _getOrdersByUserId = (id) => {
   `
 }
 
+/////////////////////////////////
 
 export const GET_ALL_ORDERS: string = `
   query {

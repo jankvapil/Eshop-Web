@@ -21,7 +21,6 @@ const Register = () => {
 
   return (
     <Layout>
-        <hr className="my-4" />
         <RegisterForm />
     </Layout>
   )
