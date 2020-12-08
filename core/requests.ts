@@ -1,5 +1,5 @@
+import { sendRequest } from "./sendRequest"
 import { OrderItem, User } from "./types"
-
 
 const getNowDate = () => {
   const dt = new Date()
@@ -13,6 +13,35 @@ const getNowDate = () => {
 
   return now
 }
+
+export const getOrdersByUserId = async (id) => {
+  const query = _getOrdersByUserId(id)
+  console.log(query)
+  const res = await sendRequest(query)
+  return res
+}
+
+export const _getOrdersByUserId = (id) => {
+  return `
+    query {
+      user(id: ${id}) {
+        name
+        orders {
+          id
+          orderDate
+          orderItems {
+            product {
+              name
+              price
+            }
+            count
+          }
+        }
+      }
+    }
+  `
+}
+
 
 export const GET_ALL_ORDERS: string = `
   query {

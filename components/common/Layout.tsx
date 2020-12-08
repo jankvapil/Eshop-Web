@@ -27,7 +27,14 @@ const Layout = (props) => {
         <Header />
         
         <Navbar />
-        { props.children }
+
+        <div
+          style={{
+            marginTop: 60
+          }}
+        >
+          { props.children }
+        </div>
       </div>
       <Footer />
     </div>

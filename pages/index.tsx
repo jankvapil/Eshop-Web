@@ -1,20 +1,24 @@
 import { useState, useEffect } from 'react'
 import { sendRequest } from 'core/sendRequest'
 import * as requests from 'core/requests'
+import useGlobal from '../core/store'
 
 import Layout from 'components/common/Layout'
 
 import ProductSection from 'components/products/ProductSection'
-import UserFormSection from 'components/userForm/UserFormSection'
+// import UserFormSection from 'components/userForm/UserFormSection'
 
 import { Product, UserOrders } from 'core/types'
+import NewOrderForm from '@/components/newOrder/newOrderForm'
 
 
 ///
 /// Main Page
 ///
 const App = () => {
-  
+
+  const [globalState, globalActions] = useGlobal();
+
   ///
   /// set responsible height every time window resizes
   ///
@@ -89,10 +93,11 @@ const App = () => {
 
   return (
       <Layout>
-        
-        <hr className="my-4" />
         <ProductSection products={products} productMap={productMap} />
-        <hr className="my-4" />
+        
+
+        { globalState.isLogged ? (<NewOrderForm productMap={productMap} />): "" } 
+
         {/* <UserFormSection 
           productMap={productMap} 
           getOrders={getOrders}

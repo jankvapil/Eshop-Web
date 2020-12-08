@@ -21,7 +21,6 @@ const Login = () => {
 
   return (
     <Layout>
-        <hr className="my-4" />
         <LoginForm />
     </Layout>
   )

@@ -1,10 +1,11 @@
 import { useState, useEffect } from 'react'
-import { sendRequest } from 'core/sendRequest'
+import useGlobal from '@/core/store'
+
 import * as requests from 'core/requests'
 
 import Layout from 'components/common/Layout'
 
-import OrderSection from 'components/orders/OrderSection'
+import OrdersGrid from 'components/orders/OrdersGrid'
 
 import { UserOrders } from 'core/types'
 
@@ -14,6 +15,8 @@ import { UserOrders } from 'core/types'
 ///
 const Orders = () => {
 
+  const [globalState, globalActions] = useGlobal();
+  
   ///
   /// fetch orders from db when page is loaded
   ///
@@ -27,22 +30,28 @@ const Orders = () => {
   /// fetch orders from db
   ///
   const getOrders = async () => {
-    const result = sendRequest(requests.GET_ALL_ORDERS)
-    result.then((res) => {
-      if (res) {
-        console.log(res)
-        setOrders(res.users)
-      }
-    })
+    
+    if (globalState.user.id) {
+      const result = await requests.getOrdersByUserId(globalState.user.id)
+      console.log(result)
+      setOrders(result.user.orders)
+    }
+   
+    // const result = sendRequest(requests.GET_ALL_ORDERS)
+    // result.then((res) => {
+    //   if (res) {
+    //     console.log(res)
+    //     setOrders(res.users)
+    //   }
+    // })
   }
 
   /////////////////////////////
 
   return (
     <Layout> 
-      
-      <hr className="my-4" />
-      <OrderSection orders={orders} />
+      {/* <OrderSection orders={orders} /> */}
+      <OrdersGrid orders={orders}/>
     </Layout>
   )
 }

@@ -26,7 +26,7 @@ React.FC<OrderSectionProps> = ({ orders }) => {
   return (
     <section style={styles.container}>
       <header>
-        <h2 style={{margin: '0 0 20px 10px'}}>Orders</h2>
+        <h2 style={{margin: '0 0 20px 10px'}}>My Orders</h2>
       </header>
 
       <table className="table table-hover">

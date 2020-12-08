@@ -3,68 +3,108 @@ import Link from 'next/link'
 import { useEffect, useState } from 'react'
 import { useRouter } from 'next/router'
 
+import useGlobal from '../../core/store'
+
+///
+/// Navbar component
+///
 export default function Navbar() {
 
+  const [globalState, globalActions] = useGlobal();
   const router = useRouter()
-
-  const [user, setUser] = useState({id: null, email: null})
-
-  useEffect(() => {
-    console.log("TOKEN")
-    
-    const token = localStorage.getItem('token') ? localStorage.getItem('token') : null
-    console.log(token)
-
-    if (localStorage) {
-      setUser({
-        id: localStorage.getItem('user_id'),
-        email: localStorage.getItem('user_email')
-      })
-    }
-
-  }, [])
-
 
   ///
   /// forget user
   ///
   const logout = () => {
-    localStorage.removeItem('user_id')
-    localStorage.removeItem('user_email')
+    globalActions.setUser({
+      id: undefined,
+      email: undefined
+    })
     localStorage.removeItem('token')
     router.reload()
   }
 
   /////////////////////////////
 
-  return (
-    <div style={{
-      outline: '1px solid red'
-    }}>
-      <nav className="navbar navbar-expand-lg navbar-light bg-light">
-        <Link href="/">
-          <a className="navbar-brand">Products</a>
-        </Link>
 
-        <Link href="/orders">
-          <a className="navbar-brand">Orders</a>
-        </Link>
+  const logoutLi = (
+    <div>
+      <li style={{
+          float: 'right',
+          margin: '5px 0px 5px 10px',
+        }
+      }>
+        <span style={{paddingRight: 10}}> Logged as { globalState.user.email } </span>
+        <button 
+          onClick={logout}
+          style={{ 
+            border: 'none',
+            color: '#666',
+            backgroundColor: '#fff',
+            paddingLeft: 15,
+            borderLeft: "1px solid #eee"
+          }}
+        >Logout</button>
+      </li>
 
+      <Link href="/orders">
+        <li  style={{
+          float: 'right',
+          margin: '6px 10px 6px 10px',
+        }}>
+          <a href="#" style={{color: "#666", textDecoration: 'none'}}>My Orders</a>
+        </li>
+      </Link>
+    </div>
+   
+  )
 
-          <div style={{float: 'right'}}>
-
-            <Link href="/login">
-              <a className="navbar-brand" >Login</a>
-            </Link>
-          </div>
-      </nav>
-
-      <div style={{
-        float: 'right'
+  const loginLi = (
+    <Link href="/login">
+      <li  style={{
+        float: 'right',
+        margin: '6px 10px 6px 10px',
       }}>
-        <span> { user.email } </span>
-        <button onClick={logout}>Logout</button>
-      </div>
+        <a href="#" style={{color: "#666", textDecoration: 'none'}}>Login</a>
+      </li>
+    </Link>
+  )
+  
+  /////////////////////////////
+
+  return (
+    <div 
+      style={{
+        float: 'left',
+        width: '100%',
+        borderBottom: '1px solid #eee',
+      }}  
+    >
+      <ul
+        style={{
+          listStyleType: 'none',
+          margin: 0,
+          padding: 0,
+          overflow: 'hidden',
+          backgroundColor: '#fff',
+        }}
+      >
+        <Link href="/">
+          <li style={{
+              float: 'left',
+              margin: '6px 10px 6px 2px',
+            }}
+          >
+            <a href="#" style={{color: "#666", textDecoration: 'none'}}>Home</a>
+          </li>
+        </Link>
+        
+       { globalState.isLogged ? logoutLi: loginLi } 
+
+      </ul>
     </div>
   )
 }
+
+

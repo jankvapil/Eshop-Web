@@ -94,7 +94,7 @@ const RegisterForm = () => {
       })
 
       if (res) {
-        router.push('/')
+        router.push('/login')
       } else {
         alert("Something wrong has happend!")
       }
