@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import { OrderItem, User, UserEmails } from '../../core/types'
+import { OrderItem, UserEmails } from '../../core/types'
 import useGlobal from '../../core/store'
 import { useRouter } from 'next/router'
 
@@ -18,8 +18,8 @@ const NewOrderForm:
 React.FC<NewOrderFormProps> = ({ productMap }) => {
   
   const router = useRouter()
-  const [globalState, globalActions] = useGlobal();
-  const [ users, setusers ] = useState<Array<UserEmails>>([])
+  const [globalState, ] = useGlobal();
+  const [ , setusers ] = useState<Array<UserEmails>>([])
 
   ///
   /// fetch users from db when page is loaded
@@ -42,20 +42,20 @@ React.FC<NewOrderFormProps> = ({ productMap }) => {
     })
   }
 
-  ///
-  /// Add user to db, returns user id 
-  ///
-  const addUser = async (user: User): Promise<number> => {
-    const result = sendRequest(requests.ADD_USER(user))
-    let retVal = await result.then((res) => {
-      if (res) {
-        console.log(res.addUser.user.id)
-        getUsers()
-        return res.addUser.user.id
-      }
-    })
-    return Promise.resolve(retVal)
-  }
+  // ///
+  // /// Add user to db, returns user id 
+  // ///
+  // const addUser = async (user: User): Promise<number> => {
+  //   const result = sendRequest(requests.ADD_USER(user))
+  //   let retVal = await result.then((res) => {
+  //     if (res) {
+  //       console.log(res.addUser.user.id)
+  //       getUsers()
+  //       return res.addUser.user.id
+  //     }
+  //   })
+  //   return Promise.resolve(retVal)
+  // }
 
   ///
   /// Add order to db, returns order id 

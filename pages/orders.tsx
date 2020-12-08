@@ -15,7 +15,7 @@ import { UserOrders } from 'core/types'
 ///
 const Orders = () => {
 
-  const [globalState, globalActions] = useGlobal();
+  const [globalState, ] = useGlobal();
   
   ///
   /// fetch orders from db when page is loaded

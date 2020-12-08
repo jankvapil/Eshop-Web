@@ -17,7 +17,7 @@ import NewOrderForm from '@/components/newOrder/newOrderForm'
 ///
 const App = () => {
 
-  const [globalState, globalActions] = useGlobal();
+  const [globalState, ] = useGlobal();
 
   ///
   /// set responsible height every time window resizes
