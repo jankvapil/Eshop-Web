@@ -1,14 +1,14 @@
 import { useState, useEffect } from 'react'
 import { sendRequest } from 'core/sendRequest'
 import * as requests from 'core/requests'
-import useGlobal from '../core/store'
+// import useGlobal from '../core/store'
 
 import Layout from 'components/common/Layout'
 
 import ProductSection from 'components/products/ProductSection'
 // import UserFormSection from 'components/userForm/UserFormSection'
 
-import { Product, UserOrders } from 'core/types'
+import { Product } from 'core/types'
 import NewOrderForm from '@/components/newOrder/newOrderForm'
 
 
@@ -17,43 +17,15 @@ import NewOrderForm from '@/components/newOrder/newOrderForm'
 ///
 const App = () => {
 
-  const [globalState, ] = useGlobal();
+  // const [globalState, ] = useGlobal()
 
-  ///
-  /// set responsible height every time window resizes
-  ///
-  // const [height, setHeight] = useState(window.innerHeight)
-  // useEffect(() => {
-  //   const handleResize = () => {
-  //     setHeight(window.innerHeight)
-  //   }
-  //   window.addEventListener('resize', handleResize)
-  //   return () => {
-  //     window.removeEventListener('resize', handleResize)
-  //   }
-  // })
+  const [userId, setUserId] = useState(null)
 
-  ///
-  /// fetch orders from db when page is loaded
-  ///
-  const [, setOrders] = useState<Array<UserOrders>>([])
   useEffect(() => {
-    getOrders()
-    console.log("loaded")
+    if (localStorage) {
+      setUserId(localStorage.getItem('user_id'))
+    }
   }, [])
-
-  ///
-  /// fetch orders from db
-  ///
-  const getOrders = async () => {
-    const result = sendRequest(requests.GET_ALL_ORDERS)
-    result.then((res) => {
-      if (res) {
-        console.log(res)
-        setOrders(res.users)
-      }
-    })
-  }
 
   ///
   /// fetch products from db when page is loaded
@@ -93,19 +65,8 @@ const App = () => {
 
   return (
       <Layout>
-        <ProductSection products={products} productMap={productMap} />
-        
-
-        { globalState.isLogged ? (<NewOrderForm productMap={productMap} />): "" } 
-
-        {/* <UserFormSection 
-          productMap={productMap} 
-          getOrders={getOrders}
-        /> */}
-        
-        {/* <OrderSection orders={orders} /> */}
-        {/* <hr className="my-4" /> */}
-        
+        <ProductSection products={products} productMap={productMap} />      
+        { userId ? (<NewOrderForm userId={userId} productMap={productMap} />): "" } 
     </Layout>
   )
 }

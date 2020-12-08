@@ -2,6 +2,7 @@
 
 import '../public/reset.css'
 import '../public/bootstrap.css'
+import '../public/global.css'
 
 import 'devextreme/dist/css/dx.common.css'
 import 'devextreme/dist/css/dx.light.css'

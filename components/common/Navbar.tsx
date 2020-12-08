@@ -1,26 +1,41 @@
 
 import Link from 'next/link'
 import { useRouter } from 'next/router'
+import { useState, useEffect } from 'react'
 
-import useGlobal from '../../core/store'
+// import useGlobal from '../../core/store'
 
 ///
 /// Navbar component
 ///
 export default function Navbar() {
 
-  const [globalState, globalActions] = useGlobal();
+  // const [globalState, globalActions] = useGlobal()
+  // const [userId, setUserId] = useState(null)
+  const [userEmail, setUserEmail] = useState(null)
+
+  useEffect(() => {
+    if (localStorage) {
+      setUserEmail(localStorage.getItem('user_email'))
+      // setUserId(localStorage.getItem('user_id'))
+    }
+  }, [])
+
   const router = useRouter()
 
   ///
   /// forget user
   ///
   const logout = () => {
-    globalActions.setUser({
-      id: undefined,
-      email: undefined
-    })
+    // globalActions.setUser({
+    //   id: undefined,
+    //   email: undefined
+    // })
     localStorage.removeItem('token')
+    localStorage.removeItem('user_email')
+    localStorage.removeItem('user_id')
+    // setUserId(null)
+    setUserEmail(null)
     router.reload()
   }
 
@@ -34,7 +49,10 @@ export default function Navbar() {
           margin: '5px 0px 5px 10px',
         }
       }>
-        <span style={{paddingRight: 10}}> Logged as { globalState.user.email } </span>
+        <span style={{paddingRight: 10}}> Logged as { 
+          // globalState.user.email 
+          userEmail ? userEmail : ""
+        } </span>
         <button 
           onClick={logout}
           style={{ 
@@ -95,12 +113,13 @@ export default function Navbar() {
               margin: '6px 10px 6px 2px',
             }}
           >
-            <a href="#" style={{color: "#666", textDecoration: 'none'}}>Home</a>
+            <a href="#" style={{color: "#666", textDecoration: 'none'}}>Products</a>
           </li>
         </Link>
         
-       { globalState.isLogged ? logoutLi: loginLi } 
+       { userEmail ? logoutLi: loginLi } 
 
+       {/* { globalState.isLogged ? logoutLi: loginLi }  */}
       </ul>
     </div>
   )

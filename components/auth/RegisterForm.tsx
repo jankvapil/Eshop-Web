@@ -112,7 +112,12 @@ const RegisterForm = () => {
   //////////////////////////////
 
   return (
-    <div style={{float: 'left', width: '100%'}}>
+    <div style={{
+      float: 'left', 
+      width: '100%',
+      // outline: '1px solid red', 
+      height: 500
+    }}>
       <section>
         <header>
           <h2 style={{margin: '0 0 20px 10px'}}>Register</h2>

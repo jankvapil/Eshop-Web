@@ -32,8 +32,9 @@ export type User = {
 }
 
 export type OrderItem = {
-  orderId: number
-  productId: number
+  id: number
+  productId?: number
+  product?: Product
   count: number
 }
 

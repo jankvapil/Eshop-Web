@@ -7,7 +7,7 @@ const Footer = () => {
 
   const styles = {
     container: {
-      padding: '500px 0 50px 0',
+      // padding: '50px 0 50px 0',
       margin: 'auto',
       width: 1000,
       minHeight: 200,
@@ -20,9 +20,16 @@ const Footer = () => {
   }
 
   return (
-    <div className="Footer" style={ styles.container }>
-      <div style={styles.info}>
-        <p style={{textAlign: 'center'}}>Created by <br /> jkvapil6@gmail.com</p>
+    <div
+      style={{
+        width: '100%',
+        float: 'left'
+      }}
+    >
+      <div className="Footer" style={ styles.container }>
+        <div style={styles.info}>
+          <p style={{textAlign: 'center'}}>Created by <br /> jkvapil6@gmail.com</p>
+        </div>
       </div>
     </div>
   );

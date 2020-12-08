@@ -43,6 +43,7 @@ export const _getOrdersByUserId = (id) => {
           id
           orderDate
           orderItems {
+            id
             product {
               name
               price
@@ -147,7 +148,7 @@ export const CREATE_ORDER_ITEM = (
   return `
     mutation {
       addOrderItem(input: {
-        orderId: ${orderItem.orderId}
+        orderId: ${orderItem.id}
         productId: ${orderItem.productId}
         count: ${orderItem.count}
       }) {

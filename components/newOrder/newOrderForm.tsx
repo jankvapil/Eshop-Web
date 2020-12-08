@@ -1,24 +1,23 @@
 import React, { useState, useEffect } from 'react'
 import { OrderItem, UserEmails } from '../../core/types'
-import useGlobal from '../../core/store'
+// import useGlobal from '../../core/store'
 import { useRouter } from 'next/router'
 
 import { sendRequest } from 'core/sendRequest'
 import * as requests from 'core/requests'
 
-interface  NewOrderFormProps {
-  // getOrders: Function
+interface NewOrderFormProps {
   productMap: Map<number, number>
+  userId: number
 }
 
 ///
 /// UserForm Section component
 ///
 const NewOrderForm: 
-React.FC<NewOrderFormProps> = ({ productMap }) => {
+React.FC<NewOrderFormProps> = ({ productMap, userId }) => {
   
   const router = useRouter()
-  const [globalState, ] = useGlobal();
   const [ , setusers ] = useState<Array<UserEmails>>([])
 
   ///
@@ -41,21 +40,6 @@ React.FC<NewOrderFormProps> = ({ productMap }) => {
       }
     })
   }
-
-  // ///
-  // /// Add user to db, returns user id 
-  // ///
-  // const addUser = async (user: User): Promise<number> => {
-  //   const result = sendRequest(requests.ADD_USER(user))
-  //   let retVal = await result.then((res) => {
-  //     if (res) {
-  //       console.log(res.addUser.user.id)
-  //       getUsers()
-  //       return res.addUser.user.id
-  //     }
-  //   })
-  //   return Promise.resolve(retVal)
-  // }
 
   ///
   /// Add order to db, returns order id 
@@ -121,7 +105,7 @@ React.FC<NewOrderFormProps> = ({ productMap }) => {
         productMap.forEach((value, key) => {
           if (value > 0) {
             createOrderItem({
-              orderId: orderId,
+              id: orderId,
               productId: key,
               count: value
             })
@@ -139,10 +123,7 @@ React.FC<NewOrderFormProps> = ({ productMap }) => {
   ///
   const handleBuyProducts = () => {
 
-    console.log(productMap)
-    console.log(globalState.user)
     // atleast one product has to be on shopping list
-    
     let flag = 0
     
     productMap.forEach((value, ) => {  
@@ -158,7 +139,7 @@ React.FC<NewOrderFormProps> = ({ productMap }) => {
       return
     } else {
   
-      handleBuyProducts_createOrder(globalState.user.id)
+      handleBuyProducts_createOrder(userId)
     }
   }
 
@@ -220,4 +201,4 @@ React.FC<NewOrderFormProps> = ({ productMap }) => {
   );
 }
 
-export default NewOrderForm;
+export default NewOrderForm

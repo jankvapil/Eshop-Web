@@ -53,6 +53,7 @@ const UserFormSection = () => {
 
         console.log(`logged as ${id}:${email}`)
 
+        localStorage.setItem('isLogged', 'true')
         localStorage.setItem('token', res.token)
         localStorage.setItem('user_email', email)
         localStorage.setItem('user_id', id)
@@ -80,7 +81,13 @@ const UserFormSection = () => {
   //////////////////////////////
 
   return (
-    <div style={{float: 'left', width: '100%'}}>
+    <div style={{
+        float: 'left', 
+        width: '100%',
+        // outline: '1px solid red', 
+        height: 300
+      }}
+    >
       <section>
         <header>
           <h2 style={{margin: '0 0 20px 10px'}}>Login</h2>
