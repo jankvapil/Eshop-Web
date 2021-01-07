@@ -1,6 +1,5 @@
-import React, { useState, useEffect } from 'react'
-import { OrderItem, UserEmails } from '../../core/types'
-// import useGlobal from '../../core/store'
+
+import { OrderItem } from '../../core/types'
 import { useRouter } from 'next/router'
 
 import { sendRequest } from 'core/sendRequest'
@@ -18,28 +17,6 @@ const NewOrderForm:
 React.FC<NewOrderFormProps> = ({ productMap, userId }) => {
   
   const router = useRouter()
-  const [ , setusers ] = useState<Array<UserEmails>>([])
-
-  ///
-  /// fetch users from db when page is loaded
-  ///
-  useEffect(() => {
-    // getUsers()
-  }, [])
-
-  //////////////////////////////
-
-  // ///
-  // /// fetch users from db
-  // ///
-  // const getUsers = async () => {
-  //   const result = sendRequest(requests.GET_ALL_USER_EMAILS)
-  //   result.then((res) => {
-  //     if (res) {
-  //       setusers(res.users)
-  //     }
-  //   })
-  // }
 
   ///
   /// Add order to db, returns order id 

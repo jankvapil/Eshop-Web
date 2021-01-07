@@ -26,12 +26,11 @@ export default function OrderDetailPopup({
         <div></div>
         
         <div>
-          {/* <h1>Detail of order { selectedOrder.id }</h1> */}
           <h2>Total price: ${ selectedOrder ? selectedOrder.totalPrice : ""}</h2>
-          {/* <button onClick={() => console.log(selectedOrder)}>Click</button> */}
-
           <ul>
-            { selectedOrder ? selectedOrder.orderItems.map(oi => (<OrderItemRow key={oi.id} orderItem={oi} />)) : ""}
+            { selectedOrder ? 
+                selectedOrder.orderItems.map(oi => (<OrderItemRow key={oi.id} orderItem={oi} />))
+                : "" }
           </ul>
         </div>
       </Popup>
