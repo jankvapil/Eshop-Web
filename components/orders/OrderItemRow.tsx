@@ -13,7 +13,7 @@ const OrderItemRow: React.FC<OrderItemProps> = ({
 }) => {  
   return (
     <li key={orderItem.id}>
-        { orderItem.count }x | { orderItem.product[0].name } | ${ orderItem.product[0].price }
+      { orderItem.count }x | { orderItem.product[0].name } | ${ orderItem.product[0].price }
     </li>
   )
 }

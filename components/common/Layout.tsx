@@ -12,22 +12,17 @@ const Layout = (props) => {
     <div>
       <Head>
         <title>Eshop</title>
-        {/* <link rel="icon" href="/favicon.ico" /> */}
      </Head>
 
-      
       <div 
         className="App" 
         style={{
           margin: 'auto',
           width: 1000,
-          // outline: 'red solid 1px',
         }}
       >
         <Header />
-        
         <Navbar />
-
         <div
           style={{
             marginTop: 60

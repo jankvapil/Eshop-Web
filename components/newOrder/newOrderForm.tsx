@@ -24,22 +24,22 @@ React.FC<NewOrderFormProps> = ({ productMap, userId }) => {
   /// fetch users from db when page is loaded
   ///
   useEffect(() => {
-    getUsers()
+    // getUsers()
   }, [])
 
   //////////////////////////////
 
-  ///
-  /// fetch users from db
-  ///
-  const getUsers = async () => {
-    const result = sendRequest(requests.GET_ALL_USER_EMAILS)
-    result.then((res) => {
-      if (res) {
-        setusers(res.users)
-      }
-    })
-  }
+  // ///
+  // /// fetch users from db
+  // ///
+  // const getUsers = async () => {
+  //   const result = sendRequest(requests.GET_ALL_USER_EMAILS)
+  //   result.then((res) => {
+  //     if (res) {
+  //       setusers(res.users)
+  //     }
+  //   })
+  // }
 
   ///
   /// Add order to db, returns order id 
@@ -132,8 +132,6 @@ React.FC<NewOrderFormProps> = ({ productMap, userId }) => {
       }
     })
 
-    console.log(flag)
-
     if (flag < 1) { 
       alert("You have to chose atleast one product!")
       return
@@ -147,56 +145,12 @@ React.FC<NewOrderFormProps> = ({ productMap, userId }) => {
 
   return (
     <div style={{float: 'left', width: '100%'}}>
-      {/* <section>
-        <header>
-          <h2 style={{margin: '0 0 20px 10px'}}>Delivery Details</h2>
-        </header>
-
-        <div 
-          style={{ width: 500, margin: 'auto' }} 
-          className="form-group"
-        >
-          <label htmlFor="nameInput">Name</label>
-          <input 
-            id="nameInput" 
-            type="text" 
-            className="form-control" 
-            placeholder="Enter your name"
-            style={styles.textField} 
-            onChange={handleNameChange}
-          />
-          
-          <label htmlFor="emailInput">Email</label>
-          <input 
-            id="emailInput" 
-            type="email" 
-            className="form-control" 
-            aria-describedby="emailHelp" 
-            placeholder="Enter your email"
-            style={styles.textField}
-            onChange={handleEmailChange} 
-          />
-
-          <label htmlFor="addressInput">Address</label>
-          <input 
-            id="addressInput" 
-            type="email" 
-            className="form-control" 
-            aria-describedby="emailHelp" 
-            placeholder="Enter your address"
-            style={styles.textField} 
-            onChange={handleAddressChange}
-          /> */}
-          
-          <button
-             onClick={handleBuyProducts}
-            style={{width: 150, fontSize: 14, float: 'right'}} 
-            type="submit" 
-            className="btn btn-secondary"
-          > BUY </button>
-
-        {/* </div>
-      </section> */}
+      <button
+          onClick={handleBuyProducts}
+        style={{width: 150, fontSize: 14, float: 'right'}} 
+        type="submit" 
+        className="btn btn-secondary"
+      > BUY </button>
     </div>
   );
 }

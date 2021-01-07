@@ -3,7 +3,6 @@ import DataGrid, {
   Column, 
   Pager, 
   Paging,
-  // Format
 } from 'devextreme-react/data-grid'
 
 ///
@@ -11,7 +10,6 @@ import DataGrid, {
 ///
 export default function OrdersGrid({
   orders,
-  // popupVisible,
   setSelectedOrder, 
   setPopupVisible
 }) { 
@@ -52,7 +50,6 @@ export default function OrdersGrid({
         </Column>
         <Column dataField="totalPrice" caption="Total Price" />
         <Column 
-          // visible={true}
           type="buttons"
           width={110}
           buttons={[

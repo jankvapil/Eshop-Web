@@ -1,15 +1,8 @@
-import { createUser, fetchUserEmails } from '@/core/authRequests'
-import { useState, useEffect } from 'react'
+import { createUser } from '@/core/authRequests'
+import { useState } from 'react'
+import bcrypt from 'bcryptjs'
 
 import { useRouter } from 'next/router'
-
-// interface  UserFormSectionProps {
-//   getOrders: Function
-//   productMap: Map<number, number>
-// }
-
-// : 
-// React.FC<UserFormSectionProps> 
 
 ///
 /// UserForm Section component
@@ -22,20 +15,6 @@ const RegisterForm = () => {
   const [ email, setEmail ] = useState("")
   const [ password, setPassword ] = useState("")
   const [ address, setAddress ] = useState("")
- 
-  const [ users, setUsers ] = useState([])
-
-  //////////////////////////////
-
-  useEffect(() => {
-    loadUserEmails()
-  }, [])
-
-  const loadUserEmails = async () => {
-    const res = await fetchUserEmails()
-    setUsers(res.users)
-    console.log(res)
-  }
 
   //////////////////////////////
 
@@ -74,29 +53,28 @@ const RegisterForm = () => {
       return false
     }
 
-    const exists = users.map(u => u.email).includes(email)
-    return exists
+    return true
   }
 
+  ///
+  /// Handle click on register button
+  ///
   const handleOnClick = async () => {
-    console.log(`Register: ${name}:${password}:${email}:${address}`)
 
     if (validateForm()) {
-      alert("User already exists!")
-    } else {
-      // const salt = bcrypt.genSaltSync(10)
-      // const hashedPass = bcrypt.hashSync(password, salt)
+      const salt = bcrypt.genSaltSync(10)
+      const hashedPass = bcrypt.hashSync(password, salt)
       const res = await createUser({
         name: name,
-        password: password,
+        password: hashedPass,
         email: email,
         address: address
       })
-
+  
       if (res) {
         router.push('/login')
       } else {
-        alert("Something wrong has happend!")
+        alert("Error! Email is already taken.")
       }
     }
   }
@@ -115,7 +93,6 @@ const RegisterForm = () => {
     <div style={{
       float: 'left', 
       width: '100%',
-      // outline: '1px solid red', 
       height: 500
     }}>
       <section>
@@ -168,7 +145,6 @@ const RegisterForm = () => {
             style={styles.textField}
             onChange={handleAddressChange} 
           />
-          
           
           <button
             onClick={handleOnClick}

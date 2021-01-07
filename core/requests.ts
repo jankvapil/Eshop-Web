@@ -90,14 +90,25 @@ export const GET_ALL_PRODUCTS: string = `
   }
 `
 
-export const GET_ALL_USER_EMAILS: string = `
+/////////////////////////////
+
+export const fetchUsers = async () => {
+  const res = await sendRequest(GET_ALL_USERS)
+  if (res && res.users)
+    return res.users
+} 
+
+export const GET_ALL_USERS: string = `
   query {
     users {
       id
+      name
       email
     }
   }
 `
+
+/////////////////////////////
 
 export const ADD_ORDER: string = `
   mutation {

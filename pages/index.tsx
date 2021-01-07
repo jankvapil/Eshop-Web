@@ -34,7 +34,6 @@ const App = () => {
   const [products, setProducts] = useState<Product[]>([])
   useEffect(() => {
     getProducts()
-    console.log("loaded")
   }, [])
 
   ///

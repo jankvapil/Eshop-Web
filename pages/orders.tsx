@@ -37,7 +37,6 @@ const Orders = () => {
   useEffect(() => {
     if (userId) {
       getOrders()
-      console.log("loaded")
     }
   }, [userId])
 
@@ -46,7 +45,6 @@ const Orders = () => {
   ///
   const getOrders = async () => {
     const result = await requests.getOrdersByUserId(userId)
-    console.log(result)
     setOrders(result.user.orders)
   }
 

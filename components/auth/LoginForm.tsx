@@ -1,21 +1,14 @@
 import { useState } from 'react'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
-import useGlobal from '../../core/store'
-
-
-var jwt = require('jsonwebtoken')
-
+import { verify } from 'jsonwebtoken'
 import { login } from '@/core/authRequests'
-
-
 
 ///
 /// UserForm Section component
 ///
 const UserFormSection = () => {
   
-  const [, globalActions] = useGlobal();
   const router = useRouter()
 
   const [ email, setEmail ] = useState("")
@@ -47,22 +40,15 @@ const UserFormSection = () => {
       // successfully logged in
       if (res) {
         
-        const decoded = jwt.verify(res.token, "secretsecretsecret");
+        const decoded = verify(res.token, "secretsecretsecret");
         const email = decoded['http://schemas.xmlsoap.org/ws/2005/05/identity/claims/name']
         const id = decoded['http://schemas.xmlsoap.org/ws/2005/05/identity/claims/nameidentifier']
-
-        console.log(`logged as ${id}:${email}`)
 
         localStorage.setItem('isLogged', 'true')
         localStorage.setItem('token', res.token)
         localStorage.setItem('user_email', email)
         localStorage.setItem('user_id', id)
 
-        globalActions.setIsLogged(true),
-        globalActions.setUser({
-          id: id,
-          email: email
-        })
         router.push('/')
       } else {
         alert("Wrong email or password")
@@ -84,7 +70,6 @@ const UserFormSection = () => {
     <div style={{
         float: 'left', 
         width: '100%',
-        // outline: '1px solid red', 
         height: 300
       }}
     >

@@ -3,21 +3,23 @@ import Link from 'next/link'
 import { useRouter } from 'next/router'
 import { useState, useEffect } from 'react'
 
-// import useGlobal from '../../core/store'
-
 ///
 /// Navbar component
 ///
 export default function Navbar() {
 
-  // const [globalState, globalActions] = useGlobal()
-  // const [userId, setUserId] = useState(null)
+  const [isAdmin, setIsAdmin] = useState(false)
   const [userEmail, setUserEmail] = useState(null)
 
   useEffect(() => {
     if (localStorage) {
       setUserEmail(localStorage.getItem('user_email'))
-      // setUserId(localStorage.getItem('user_id'))
+
+      const id = localStorage.getItem('user_id')
+
+      if (id && Number(id) % 2 == 0) {
+        setIsAdmin(true)
+      }
     }
   }, [])
 
@@ -27,20 +29,16 @@ export default function Navbar() {
   /// forget user
   ///
   const logout = () => {
-    // globalActions.setUser({
-    //   id: undefined,
-    //   email: undefined
-    // })
     localStorage.removeItem('token')
     localStorage.removeItem('user_email')
     localStorage.removeItem('user_id')
-    // setUserId(null)
     setUserEmail(null)
-    router.reload()
+
+    router.push('/')
+    setInterval(() => router.reload(), 100)
   }
 
   /////////////////////////////
-
 
   const logoutLi = (
     <div>
@@ -50,9 +48,10 @@ export default function Navbar() {
         }
       }>
         <span style={{paddingRight: 10}}> Logged as { 
-          // globalState.user.email 
           userEmail ? userEmail : ""
-        } </span>
+        } 
+        { isAdmin ? " (admin)" : ""}
+        </span>
         <button 
           onClick={logout}
           style={{ 
@@ -64,6 +63,17 @@ export default function Navbar() {
           }}
         >Logout</button>
       </li>
+      
+      { isAdmin ? (
+          <Link href="/users">
+            <li  style={{
+              float: 'right',
+              margin: '6px 10px 6px 10px',
+            }}>
+              <a href="#" style={{color: "#666", textDecoration: 'none'}}>Users</a>
+            </li>
+          </Link>
+        ) : ""}
 
       <Link href="/orders">
         <li  style={{
@@ -74,7 +84,6 @@ export default function Navbar() {
         </li>
       </Link>
     </div>
-   
   )
 
   const loginLi = (
@@ -117,9 +126,7 @@ export default function Navbar() {
           </li>
         </Link>
         
-       { userEmail ? logoutLi: loginLi } 
-
-       {/* { globalState.isLogged ? logoutLi: loginLi }  */}
+       { userEmail ? logoutLi : loginLi } 
       </ul>
     </div>
   )

@@ -31,7 +31,7 @@ export default function OrderDetailPopup({
           {/* <button onClick={() => console.log(selectedOrder)}>Click</button> */}
 
           <ul>
-            { selectedOrder ? selectedOrder.orderItems.map(oi => (<OrderItemRow orderItem={oi} />)) : ""}
+            { selectedOrder ? selectedOrder.orderItems.map(oi => (<OrderItemRow key={oi.id} orderItem={oi} />)) : ""}
           </ul>
         </div>
       </Popup>
